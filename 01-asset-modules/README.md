@@ -1,6 +1,6 @@
 # Manage Assets with Webpack
 
-Asset Modules handles 4 module types:
+Asset modules handles 4 module types:
 
 - **asset/resource** emits a separate file and exports the URL.
 - **asset/inline** exports a data URI of the asset.
