@@ -1,7 +1,7 @@
 {
   "name": "03-plugins",
   "version": "1.0.0",
-  "description": "A webpack `plugin` is a JavaScript object that has an `apply` method. This `apply` method is called by the webpack compiler, giving access to the entire compilation lifecycle.",
+  "description": "Custom Webpack Configurations",
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.config.js",

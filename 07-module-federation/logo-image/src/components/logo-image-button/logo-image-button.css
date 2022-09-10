@@ -1,0 +1,15 @@
+.logo-image-button {
+  display: block;
+  font-size: 20px;
+  padding: 7px 15px;
+  background: green;
+  color: white;
+  outline: none;
+}
+
+.logo-image {
+  display: inline;
+  margin: 1rem;
+  width: 64px;
+  height: auto;
+}

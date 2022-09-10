@@ -1,7 +1,7 @@
 {
   "name": "01-asset-modules",
   "version": "1.0.0",
-  "description": "Asset Modules handles 4 module types:",
+  "description": "Custom Webpack Configurations",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
