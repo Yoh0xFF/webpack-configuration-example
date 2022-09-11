@@ -1,6 +1,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { ModuleFederationPlugin } = require("webpack").container;
 
 module.exports = {
   entry: "./src/logo-image.js",
@@ -46,6 +47,12 @@ module.exports = {
       template: "src/page-template.hbs",
       title: "Logo Image",
       description: "Logo image page",
+    }),
+    new ModuleFederationPlugin({
+      name: "LogoImageApp",
+      remotes: {
+        HelloWorldApp: "HelloWorldApp@http://localhost:9001/remoteEntry.js",
+      },
     }),
   ],
 };

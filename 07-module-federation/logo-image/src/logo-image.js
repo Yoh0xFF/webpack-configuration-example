@@ -8,6 +8,12 @@ heading.render(_.upperFirst("logo image"));
 const logoImageButton = new LogoImageButton();
 logoImageButton.render();
 
+import("HelloWorldApp/HelloWorldButton").then((HelloWorldButtonModule) => {
+  const HelloWorldButton = HelloWorldButtonModule.default;
+  const helloWorldButton = new HelloWorldButton();
+  helloWorldButton.render();
+});
+
 if (process.env.NODE_ENV === "production") {
   console.log("This is a production build");
 } else if (process.env.NODE_ENV === "development") {
