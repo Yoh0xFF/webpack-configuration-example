@@ -1,3 +1,3 @@
-# Mutli Page Apps and Code Splitting
+# Hello World Page
 
-A multi-page application (MPA) is an app that has more than one page.
+Hello world page of our micro-frontend application.

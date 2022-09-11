@@ -1,3 +1,3 @@
-# Mutli Page Apps and Code Splitting
+# Logo Image Page
 
-A multi-page application (MPA) is an app that has more than one page.
+Logo image page of our micro-frontend application.
