@@ -1,15 +1,15 @@
 const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./src/hello-world.js",
+  entry: "./src/dashboard.js",
 
   output: {
     filename: "[name].[contenthash].js", // [name] will be replaced with entry point name
     path: path.resolve(__dirname, "./dist"),
-    publicPath: "http://localhost:9001/",
+    publicPath: "http://localhost:9000/",
     clean: true, // Can be an object as well. For example: { dry: true, keep: /\.txt/ }
   },
   mode: "production",
@@ -27,10 +27,6 @@ module.exports = {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
-      {
-        test: /\.hbs$/,
-        use: ["handlebars-loader"],
-      },
     ],
   },
 
@@ -39,17 +35,14 @@ module.exports = {
       filename: "[name].[contenthash].css",
     }),
     new HtmlWebpackPlugin({
-      filename: "hello-world.html",
-      template: "src/page-template.hbs",
-      title: "Hello World",
-      description: "Hello world page",
+      filename: "dashboard.html",
+      title: "Dashboard",
     }),
     new ModuleFederationPlugin({
-      name: "HelloWorldApp",
-      filename: "remoteEntry.js",
-      exposes: {
-        "./HelloWorldPage":
-          "./src/components/hello-world-page/hello-world-page.js",
+      name: "App",
+      remotes: {
+        HelloWorldApp: "HelloWorldApp@http://localhost:9001/remoteEntry.js",
+        LogoImageApp: "LogoImageApp@http://localhost:9002/remoteEntry.js",
       },
     }),
   ],

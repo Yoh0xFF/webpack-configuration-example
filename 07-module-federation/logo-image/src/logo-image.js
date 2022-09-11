@@ -1,23 +1,4 @@
-import Heading from "./components/heading/heading";
-import LogoImageButton from "./components/logo-image-button/logo-image-button";
-import _ from "lodash";
+import LogoImagePage from "./components/logo-image-page/logo-image-page";
 
-const heading = new Heading();
-heading.render(_.upperFirst("logo image"));
-
-const logoImageButton = new LogoImageButton();
-logoImageButton.render();
-
-import("HelloWorldApp/HelloWorldButton").then((HelloWorldButtonModule) => {
-  const HelloWorldButton = HelloWorldButtonModule.default;
-  const helloWorldButton = new HelloWorldButton();
-  helloWorldButton.render();
-});
-
-if (process.env.NODE_ENV === "production") {
-  console.log("This is a production build");
-} else if (process.env.NODE_ENV === "development") {
-  console.log("This is a development build");
-} else {
-  console.log("Build type not specified");
-}
+const logoImagePage = new LogoImagePage();
+logoImagePage.render();

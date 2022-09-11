@@ -6,13 +6,12 @@ const app = express();
 
 app.use("/", express.static(path.resolve(__dirname, "../dist")));
 
-app.get("/", (req, res) => {
-  const htmlPath = path.resolve(__dirname, "../dist/logo-image.html");
+app.get("*", (req, res) => {
+  const htmlPath = path.resolve(__dirname, "../dist/dashboard.html");
   const html = fs.readFileSync(htmlPath, "utf-8");
-  res.contentType("text/html; charset=utf-8");
   res.send(html);
 });
 
-app.listen(9002, () => {
-  console.log("Application is running on http://localhost:9002/");
+app.listen(9000, () => {
+  console.log("Application is running on http://localhost:9000/");
 });

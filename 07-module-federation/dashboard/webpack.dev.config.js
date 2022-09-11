@@ -1,26 +1,30 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./src/hello-world.js",
+  entry: "./src/dashboard.js",
 
   output: {
     filename: "[name].bundle.js", // [name] will be replaced with entry point name
     path: path.resolve(__dirname, "./dist"),
-    publicPath: "http://localhost:9001/",
+    publicPath: "http://localhost:9000/",
     clean: true, // Can be an object as well. For example: { dry: true, keep: /\.txt/ }
   },
   mode: "development",
 
   devServer: {
-    port: 9001,
+    port: 9000,
     static: {
       directory: path.resolve(__dirname, "./dist"),
     },
     devMiddleware: {
-      index: "hello-world.html",
+      index: "dashboard.html",
       writeToDisk: true, // By default keeps in memory
+    },
+    historyApiFallback: {
+      index: "dashboard.html",
     },
   },
 
@@ -28,28 +32,24 @@ module.exports = {
     rules: [
       {
         test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
-      },
-      {
-        test: /\.hbs$/,
-        use: ["handlebars-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ],
   },
 
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
+    }),
     new HtmlWebpackPlugin({
-      filename: "hello-world.html",
-      template: "src/page-template.hbs",
-      title: "Hello World",
-      description: "Hello world page",
+      filename: "dashboard.html",
+      title: "Dashboard",
     }),
     new ModuleFederationPlugin({
-      name: "HelloWorldApp",
-      filename: "remoteEntry.js",
-      exposes: {
-        "./HelloWorldPage":
-          "./src/components/hello-world-page/hello-world-page.js",
+      name: "App",
+      remotes: {
+        HelloWorldApp: "HelloWorldApp@http://localhost:9001/remoteEntry.js",
+        LogoImageApp: "LogoImageApp@http://localhost:9002/remoteEntry.js",
       },
     }),
   ],

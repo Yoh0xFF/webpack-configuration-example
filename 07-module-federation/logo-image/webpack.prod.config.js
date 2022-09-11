@@ -9,7 +9,7 @@ module.exports = {
   output: {
     filename: "[name].[contenthash].js", // [name] will be replaced with entry point name
     path: path.resolve(__dirname, "./dist"),
-    publicPath: "/static/",
+    publicPath: "http://localhost:9002/",
     clean: true, // Can be an object as well. For example: { dry: true, keep: /\.txt/ }
   },
   mode: "production",
@@ -28,8 +28,8 @@ module.exports = {
         type: "asset/resource",
       },
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
         test: /\.hbs$/,
@@ -50,8 +50,10 @@ module.exports = {
     }),
     new ModuleFederationPlugin({
       name: "LogoImageApp",
-      remotes: {
-        HelloWorldApp: "HelloWorldApp@http://localhost:9001/remoteEntry.js",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./LogoImagePage":
+          "./src/components/logo-image-page/logo-image-page.js",
       },
     }),
   ],

@@ -1,4 +1,4 @@
-import "./logo-image-button.css";
+import "./logo-image-button.scss";
 import Logo from "./logo.png";
 
 class LogoImageButton {
